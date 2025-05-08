@@ -8,4 +8,4 @@ I do not provide a single public instance of it because I don't want to waste pr
 
 ## Setup
 
-Just run it with an environment variable called `GLORP_Discord_Token` with the bot token to be used and that's it.
+Just run it with an environment variable called `GLORP_Discord__Token` with the bot token to be used and that's it.
