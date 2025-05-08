@@ -10,7 +10,8 @@ var builder = Host.CreateApplicationBuilder(args);
 
 builder.Configuration.AddEnvironmentVariables("GLORP_");
 
-builder.Services.AddDiscordGateway(static opts =>
+builder.Services.AddSystemd()
+    .AddDiscordGateway(static opts =>
     {
         opts.Intents = GatewayIntents.GuildMessages | GatewayIntents.DirectMessages | GatewayIntents.MessageContent;
     })
