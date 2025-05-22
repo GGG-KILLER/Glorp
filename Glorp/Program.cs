@@ -74,7 +74,7 @@ public sealed class GlorpHandler(ILogger<GlorpHandler> logger) : IGatewayEventHa
                 stopTyping = null;
 
                 // Have a chance to use kuku-only replies with kuku.
-                var replyArray = arg.Author.Id == KukuId && Random.Shared.NextSingle() > 0.25
+                var replyArray = arg.Author.Id == KukuId && Random.Shared.NextSingle() <= 0.25
                     ? s_kukuReplies
                     : s_replies;
 
