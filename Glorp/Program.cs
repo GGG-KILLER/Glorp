@@ -65,10 +65,14 @@ public sealed class GlorpHandler(ILogger<GlorpHandler> logger) : IGatewayEventHa
                 return;
             }
 
+            IDisposable? stopTyping = null;
             var replyAsync = arg.ReplyAsync;
 
             for (var count = 0; count < 3; count++)
             {
+                stopTyping?.Dispose();
+                stopTyping = null;
+
                 // Have a chance to use kuku-only replies with kuku.
                 var replyArray = arg.Author.Id == KukuId && Random.Shared.NextSingle() > 0.25
                     ? s_kukuReplies
@@ -92,6 +96,8 @@ public sealed class GlorpHandler(ILogger<GlorpHandler> logger) : IGatewayEventHa
 
                 if (reply.Type != ReplyType.Stalling)
                     break; // Quit looping if reply is not a stalling one.
+
+                stopTyping = arg.Channel?.EnterTypingStateAsync();
             }
         }
         catch (Exception ex)
