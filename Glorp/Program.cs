@@ -98,6 +98,9 @@ public sealed class GlorpHandler(ILogger<GlorpHandler> logger) : IGatewayEventHa
                     break; // Quit looping if reply is not a stalling one.
 
                 stopTyping = arg.Channel?.EnterTypingStateAsync();
+
+                // Delay between 1 and 3 seconds before replying.
+                await Task.Delay(Random.Shared.Next(1000, 3000));
             }
         }
         catch (Exception ex)
@@ -376,7 +379,7 @@ public sealed class GlorpHandler(ILogger<GlorpHandler> logger) : IGatewayEventHa
         new Reply("ask Michi", ReplyType.NonSequitur),
         new Reply("Y E S !!!!!!!!!!!!!!!", ReplyType.Yes),
         new Reply(
-            "(in the case there is a second bot) let me ask my brother glorp 2",
+            "let me ask my brother glorp 2",
             ReplyType.NonSequitur
         ),
         new Reply("LEAVE ME ALONE, I'M SLEEPING", ReplyType.NonSequitur),
